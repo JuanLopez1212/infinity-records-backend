@@ -2,10 +2,10 @@
   "name": "infinity-records-backend",
   "version": "1.0.0",
   "description": "API Rest de Infinity Records",
-  "main": "index.js",
+  "main": "index.mjs",
   "type": "module",
   "scripts": {
-    "dev": "node --watch ./index.js"
+    "dev": "node --watch ./src/index.mjs"
   },
   "author": "Juan Diego López <juandiegolopezortiz4@gmail.com>",
   "license": "ISC",
