@@ -13,11 +13,24 @@ const createArtist = async ( req, res ) => {
     }
     catch ( error ) {    // Catch: Captura el error producido por la excepción 
         console.error ( error )
-        res.status ( 500 ).json ( { msg: 'Error al registrar el artista' } )
+        res.status( 500 ).json ( { msg: 'Error al registrar el artista' } )
     }
 } 
 
+const getAllArtists = async ( req, res ) => {
+    
+    try {
+        const data = await artistsModel.find ( {} )
+        res.json ( data )     
+    } catch (error) {
+        console.error ( error )
+        res.json ( { msg: 'Error: No se pudo obtener el listado de artistas' } )        
+    }
+    
+    
+}
 
 export {
-    createArtist
+    createArtist,
+    getAllArtists
 }
