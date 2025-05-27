@@ -22,7 +22,8 @@ const getAllArtists = async ( req, res ) => {
     try {
         const data = await artistsModel.find ( {} )
         res.json ( data )     
-    } catch (error) {
+    } 
+    catch (error) {
         console.error ( error )
         res.json ( { msg: 'Error: No se pudo obtener el listado de artistas' } )        
     }
@@ -42,14 +43,53 @@ const getArtistById = async ( req, res ) => {
         }
         
         res.json ( data )
-    } catch (error) {
+    } 
+    catch (error) {
         console.error ( error )
         res.json ( { msg: 'Error: No se pudo encontrar el artista' } )
     }
 }
 
+const removeArtistById = async ( req, res ) => {
+    const artistId = req.params.id
+    
+    try {
+        const data = await artistsModel.findByIdAndDelete ( artistId )
+        
+        if ( ! data ) {
+        return res.json ( { msg: 'El artista ya ha sido eliminado' } )
+        }   
+        res.json ( data )    
+    } 
+    catch ( error ) {
+        console.error ( error )
+        res.json ( { msg: 'Error: No se pudo eliminar al artista' } )
+    }
+    
+    
+}
+
+const updateArtistById = async ( req, res ) => {
+    const artistId = req.params.id  // Obtenemo el ID de la parametrización de la ruta
+    const inputData = req.body   // Obtenemos el body de la petición
+    
+    try {
+        const data = await artistsModel.findByIdAndUpdate ( artistId, inputData, { new: true } )
+
+        res.json ( data )    
+    } 
+    catch (error) {
+        console.error ( error )
+        res.json ( { msg: 'Error: No se pudo actualizar al artista' } )
+    }
+}
+
+
+// Exponer las funcionalidades para ser usadas por otros archivos
 export {
     createArtist,
     getAllArtists,
-    getArtistById
+    getArtistById,
+    removeArtistById,
+    updateArtistById
 }
