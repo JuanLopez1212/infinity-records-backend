@@ -1,11 +1,12 @@
 import express from 'express'  // Importo la dependencia 
-import { createArtist, getAllArtists } from '../controllers/artists.controller.mjs'
+import { createArtist, getAllArtists, getArtistById } from '../controllers/artists.controller.mjs'
 
 const router = express.Router()  // Invocando el Router de Expreess
 
 // Definir las rutas para la entidad Product 
 router.post ( '/api/artists', createArtist )
 router.get ( '/api/artists', getAllArtists)
+router.get ( '/api/artists/:id', getArtistById ) // :id (Parametrizar la ruta: Creamos una especie de variable) 
 
 
 
