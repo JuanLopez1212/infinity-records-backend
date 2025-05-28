@@ -18,4 +18,4 @@ async function dbConnect () {
     // .catch ( () => { console.log ( 'Error al conectarse a la base de datos' )})
 }    
 
-export default dbConnect 
+export default dbConnect
