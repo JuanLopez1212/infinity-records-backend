@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const eventSchema = new mongoose.Schema ({
+const eventsSchema = new mongoose.Schema ({
 
     title: {
         type: String,
@@ -24,7 +24,7 @@ const eventSchema = new mongoose.Schema ({
 
 const eventsModel = mongoose.model(
     "events",
-    eventSchema
+    eventsSchema
 );
 
 
