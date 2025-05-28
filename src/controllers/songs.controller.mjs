@@ -14,7 +14,7 @@ const createSongs = async (req, res) => {
 
     catch(error){
         console.error(error);
-        res.status( 500 ).json({msg:'Error : No se pudo registar el producto'});
+        res.status( 500 ).json({msg:'Error : No se pudo registar la cancion'});
     }
 }
 
@@ -28,7 +28,7 @@ const getAllSongs = async (req, res) => {
 
     catch(error){
         console.error(error);
-        res.json({msg: 'Error: No se pudo obtener el listado de producto'})
+        res.json({msg: 'Error: No se pudo obtener el listado de las canciones'})
     }
 }
 
@@ -43,7 +43,7 @@ const getSongsById = async (req, res) => {
         
         if(data == null){
 
-            return res.json({msg: 'Error: El producto no se encuentra registrado'});
+            return res.json({msg: 'Error: La canción no se encuentra registrada'});
         }
 
         res.json(data); 
@@ -53,7 +53,7 @@ const getSongsById = async (req, res) => {
 
     catch (error){
         console.error( error);
-        res.json({msg: 'Error: No se pudo encontrar el producto'});
+        res.json({msg: 'Error: No se pudo encontrar la canción'});
     }
 }
 
@@ -67,7 +67,7 @@ const removeSongsById = async (req, res) => {
 
     if(data == null){
 
-            return res.json({msg: 'Error: El producto no existe'});
+            return res.json({msg: 'Error: La canción no existe'});
         }
 
     res.json(data);
@@ -76,7 +76,7 @@ const removeSongsById = async (req, res) => {
 
     catch (error){
         console.error( error);
-        res.json({msg: 'Error: No se pudo encontrar el producto'});
+        res.json({msg: 'Error: No se pudo encontrar la canción'});
     }
 }
 
@@ -90,7 +90,7 @@ const updateSongsById = async (req, res) => {
     }
     catch (error){
         console.error( error);
-        res.json({msg: 'Error: No se pudo actualizar el producto'});
+        res.json({msg: 'Error: No se pudo actualizar la canción'});
     }
 
 }
