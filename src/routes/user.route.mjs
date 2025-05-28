@@ -4,11 +4,11 @@ import { createUser, getAllUser, getUserById, removeUserById, updateUserById } f
 const router = express.Router(); //invocando el router de express
 
 //Definir las rutas para la entidad Product.
-router.post( "/api/user" , createUser );
-router.get ("/api/user", getAllUser);
-router.get("/api/user/:id", getUserById);
-router.delete("/api/user/:id",removeUserById);             // id (parametrizar la ruta): creamos una especie de variable 
-router.patch("/api/user/:id", updateUserById);
+router.post( "/api/users" , createUser );
+router.get ("/api/users", getAllUser);
+router.get("/api/users/:id", getUserById);
+router.delete("/api/users/:id",removeUserById);             // id (parametrizar la ruta): creamos una especie de variable 
+router.patch("/api/users/:id", updateUserById);
 
 //exponer el router de este archivo para ser usado por otros en la aplicacion
 export default router;
