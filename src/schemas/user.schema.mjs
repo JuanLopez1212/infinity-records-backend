@@ -28,7 +28,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true,
         required:[true, "El correo del usuario es obligatorio"],
-        match:[/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/, 'Por favor, introduce un correo electrónico válido.']
+        match:[/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/, 'Por favor, introduce un correo electrónico válido.'],
+        unique:[true,"Este email ya esta registrado, por favor introduce un email validos"]
     },
 
 }, {
