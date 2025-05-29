@@ -10,6 +10,8 @@ const app = express ( )
 // Invocar la configuración de la conexión a la base de datos	
 dbConnect ()
 
+app.use ( express.json ( ) ) 
+
 // Endpoint: http//localhost:3000/
 // app.use ( products )
 app.use ( albums )
