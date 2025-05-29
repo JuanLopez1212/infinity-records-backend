@@ -43,12 +43,50 @@ const getAlbumById = async ( req, res ) => {
     }
 }
 
+const removeAlbumById = async ( req, res ) => {
+    const albumId = req.params.id 
+
+    try {
+        const data = await albumsModel.findByIdAndDelete ( albumId )
+
+        if ( ! data ) {
+            return res.json ( { msg: 'El álbum ya ha sido eliminado' } )
+        }
+        res.json ( data )
+    }
+    catch (error) {
+        console.error ( error )
+        res.json ( 500 ).json ( { msg: 'Error: No se pudo eliminar el álbum' } )
+    }
+}
+
+const updateAlbumById = async ( req, res ) => {
+    const albumId = req.params.id 
+    const inputData = req.body
+
+    try {
+        const data = await albumsModel.findByIdAndUpdate ( albumId, inputData, { new: true } )
+
+        if ( ! data ) {
+            return res.json ( { msg: 'El álbum no se encuentra registrado' } )
+        }
+
+        res.json ( data )
+    } 
+    catch (error) {
+        console.error ( error )
+        res.json ( 500 ).json ( { msg: 'Error: No se pudo actualizar el álbum' } )
+    }
+}
+
+
 
 
 
 export {
     createAlbum,
     getAllAlbums,
-    getAlbumById
-
+    getAlbumById,
+    removeAlbumById,
+    updateAlbumById
 }
