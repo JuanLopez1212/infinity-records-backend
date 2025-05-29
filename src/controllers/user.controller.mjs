@@ -1,26 +1,33 @@
 import userModel from "../schemas/user.schema.mjs";
 
 const createUser = async ( req, res ) => {
-    const inputData = req.body;  //estraigo el objeto enviado
-
-    //try:Controla las excepciones de la consulta a la base de datos 
+    const inputData = req.body;
 
     try {
-    const registeredUser = await userModel.create(inputData);
+        // Paso 1: Verificar si el usuario existe
+        const userFound = await userModel.findOne({ 
+            username: inputData.username,
+            email: inputData.email
+        });
 
-    console.log(registeredUser)                                      //imprime en la consola
-    res.send(registeredUser);                                       //enviando  la respuesta al cliente
+        if( userFound ) {
+            return res.status( 404 ).json({ msg: 'No pudo registrarse por que, el usuario ya existe.' });
+        }
 
-    }
-    catch (error) {
-        console.error(error);
-        res.json({msg:"Error: No se pudo registrar el usuario"});
+        // Paso 2: Registrar el usuario
+        const data = await userModel.create( inputData );
+
+        // Paso 3: Responder al cliente que se registro existosamente
+        res.status( 201 ).json( data );
+    } 
+    catch ( error ) {
+        console.error( error );
+        res.status( 500 ).json({ msg: 'Error: No se pudo crear el usuario' });
     }
 
 }
-
 const getAllUser = async (req, res) => {
-
+    
     try {
         const data = await userModel.find({});
         res.json(data);
@@ -87,10 +94,9 @@ const updateUserById = async (req, res) => {
         console.error(error);
         res.json({msg: "Error: no se pudo actualizar el usuario"})
     }
-
+    
     
 }
-
 
 
 //exponer las funcionalidades para ser usadas por otros archivos
