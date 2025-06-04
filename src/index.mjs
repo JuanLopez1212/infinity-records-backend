@@ -1,6 +1,7 @@
 // const express = require ( 'express' )
 import express from 'express'
 import songs from './routes/songs.mjs' // Importando las rutas de la entidad
+import reproduction from './routes/reproduction.route.mjs' // Importando las rutas de la entidad
 import dbConnect from './config/mongo.config.mjs' // Importando la configuración de la base de datos
 
 
@@ -12,7 +13,9 @@ dbConnect ()
 app.use(express.json());
 
 // Endpoint: http//localhost:3000/
+
 app.use ( songs );
+app.use ( reproduction );
 
 
 app.listen ( 3000, () => {
