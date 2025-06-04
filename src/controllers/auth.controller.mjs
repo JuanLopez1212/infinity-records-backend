@@ -36,7 +36,6 @@ const loginUser = async (req, res) => {
         payload,
         JWT_SECRET,
         { expiresIn: '1h' }
-
     );
 
     //paso 5: eliminar algunas propiedad que taren datos sensibles
@@ -54,6 +53,22 @@ const loginUser = async (req, res) => {
     });
 }
 
+const reNewToken = (req, res) => {
+    const payload = req.authUser
+
+    const JWT_SECRET = '8oy54go87wyogewy';
+
+    const token = jwt.sign(
+        payload,
+        JWT_SECRET,
+        { expiresIn: '1h' }
+    );
+
+
+    res.json({token});
+}
+
 export {
-    loginUser
+    loginUser,
+    reNewToken
 }
