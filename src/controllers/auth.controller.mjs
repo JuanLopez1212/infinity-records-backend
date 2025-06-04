@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 
 import userModel from "../schemas/user.schema.mjs";
+import { generateToken } from '../helpers/jwt.helper.mjs';
 
 const loginUser = async (req, res) => {
     // paso 1:obtener los datos del body
@@ -30,13 +30,7 @@ const loginUser = async (req, res) => {
         role: userFound.role
     };
 
-    const JWT_SECRET = '8oy54go87wyogewy';
-
-    const token = jwt.sign(
-        payload,
-        JWT_SECRET,
-        { expiresIn: '1h' }
-    );
+    const token = generateToken(payload);
 
     //paso 5: eliminar algunas propiedad que taren datos sensibles
     const objsUser = userFound.toObject();
@@ -56,14 +50,7 @@ const loginUser = async (req, res) => {
 const reNewToken = (req, res) => {
     const payload = req.authUser
 
-    const JWT_SECRET = '8oy54go87wyogewy';
-
-    const token = jwt.sign(
-        payload,
-        JWT_SECRET,
-        { expiresIn: '1h' }
-    );
-
+    const token = generateToken(payload);
 
     res.json({token});
 }

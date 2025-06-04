@@ -1,4 +1,5 @@
-import jwt from 'jsonwebtoken'
+
+import { verifyToken } from '../helpers/jwt.helper.mjs';
 
 const authUser = ( req, res, next ) => {
     console.log('soy el Middleware de Autenticacion')   //el middleware funciona para hacer tareas antes de llegar al controlador 
@@ -9,9 +10,7 @@ const authUser = ( req, res, next ) => {
         return res.json({msg:'Error: al obtener el token'});
     }
 
-    const JWT_SECRET = '8oy54go87wyogewy';
-
-    const payload = jwt.verify(token, JWT_SECRET);
+    const payload =verifyToken(token);
 
 //eliminamos propiedades adicionales
     delete payload.iat;
