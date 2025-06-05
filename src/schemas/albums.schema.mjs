@@ -17,8 +17,11 @@ const albumSchema = new mongoose.Schema( {
         default: Date.now
     },
     artistId: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'artists',
+        required: true
     }
+
 }, {} )
 
 const albumsModel = mongoose.model (

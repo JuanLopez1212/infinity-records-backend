@@ -7,15 +7,15 @@ const reproductionSchema = new mongoose.Schema({
 
     // Definir propiedades, atributos o campos (Documento)
     cancionId: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'song',
         unique: true,
         required: true,
         trim: true
     },
     usuarioId: {
-        type: String,
-        ref: 'Usuario',
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users',
         required: false,
         trim: true  // Puede ser anónimo
     },
@@ -28,8 +28,16 @@ const reproductionSchema = new mongoose.Schema({
         enum: ['web', 'mobile', 'otro'],
         default: 'web',
         trim:true
+    },
+
+    cantidadReproduccion:{
+        type: Number, 
+        default: 1,
+        required:true,
+        min:0,
+
     }
-    ,
+    
 
 }, {
     timestamps: true, // Agrega las propiedades createdAt , updatedAt
@@ -43,3 +51,4 @@ const reproductionModel = mongoose.model(
 );
 
 export default reproductionModel   // exponemos el model para ser usado por cualquier otro archivo en mi aplicación
+

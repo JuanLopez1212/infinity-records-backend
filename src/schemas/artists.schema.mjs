@@ -2,6 +2,8 @@ import mongoose from 'mongoose'
 
 // Define la estructura del documento que se va a registrar 
 const artistsSchema = new mongoose.Schema ( {
+
+
     name: {
         type: String,
         trim: true,
@@ -26,7 +28,9 @@ const artistsSchema = new mongoose.Schema ( {
         type: String,
         enum: [ 'admin', 'user', 'artist'  ],
         default: 'artist',
-    }
+    },
+
+    
 }, {
     versionKey: false,
 })

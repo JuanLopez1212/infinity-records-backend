@@ -19,20 +19,28 @@ const songsSchema = new mongoose.Schema({
         type: String,
         required: [ true, 'El archivo es obligatorio' ]
     },
-    genre: {
-        type: String,
-        required:[true, 'El genero es obligatorio'],
-        trim:true
-    },
+    // genre: {
+    //     type: String,
+    //     required:[true, 'El genero es obligatorio'],
+    //     trim:true
+    // },
     release_date: {
         type: Date,
         trim: true,
         required:[true, "La fecha de lanzamiento es obligatoria"],  
     },
     artistId:{
-        type: String,
-        
-    }
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'artists',
+        required: true
+    },
+    albumId:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'albums',
+        required: false
+    },
+
+
 
 }, {
     timestamps: true, // Agrega las propiedades createdAt , updatedAt
