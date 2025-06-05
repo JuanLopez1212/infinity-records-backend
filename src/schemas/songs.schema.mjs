@@ -25,13 +25,13 @@ const songsSchema = new mongoose.Schema({
     //     trim:true
     // },
     release_date: {
-        type: Date,
+        type: String,
         trim: true,
         required:[true, "La fecha de lanzamiento es obligatoria"],  
     },
-    artistId:{
+    userId:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'artists',
+        ref: 'users',
         required: true
     },
     albumId:{
@@ -39,8 +39,6 @@ const songsSchema = new mongoose.Schema({
         ref: 'albums',
         required: false
     },
-
-
 
 }, {
     timestamps: true, // Agrega las propiedades createdAt , updatedAt
