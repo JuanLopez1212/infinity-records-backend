@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 async function dbConnect () {
 
     try {
-        await mongoose.connect ( 'mongodb://localhost:27017/db-infinity-records', {} )
+        await mongoose.connect ( 'mongodb+srv://estebanosuna:1oXnQXvioUMwXflh@cluster0.6djkdvl.mongodb.net/db-infinity-records' )
 
         console.log ( 'Base de datos conectada exitosamente' )
     }
