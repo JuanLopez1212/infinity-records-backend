@@ -22,7 +22,7 @@ const createSongs = async (req, res) => {
 const getAllSongs = async (req, res) => {
     
     try{
-    const data = await songsModel.find({});
+    const data = await songsModel.find({}).populate(['userId']);
     res.json( data );
     }
 
@@ -37,7 +37,7 @@ const getSongsById = async (req, res) => {
 
     try{
     
-        const data = await songsModel.findById(songsId);
+        const data = await songsModel.findById(songsId).populate(['userId']);
         //  const data = await SongsModel.findOne({_id:SongsId
         //  });
         
