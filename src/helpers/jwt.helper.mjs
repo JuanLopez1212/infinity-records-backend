@@ -1,11 +1,11 @@
 import jwt from 'jsonwebtoken';
-const JWT_SECRET = '8oy54go87wyogewy';
+
+
 const generateToken = (payload) => {
-
-
-const token = jwt.sign(
+    
+    const token = jwt.sign(
         payload,
-        JWT_SECRET,
+        process.env.JWT_SECRET,
         { expiresIn: '1h' }
     );
     
@@ -15,7 +15,7 @@ const token = jwt.sign(
 const verifyToken = ( token ) => {
     const payload = jwt.verify(
         token, 
-        JWT_SECRET 
+        process.env.JWT_SECRET 
     );
     return payload;
 }

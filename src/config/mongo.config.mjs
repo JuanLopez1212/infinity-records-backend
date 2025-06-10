@@ -1,10 +1,11 @@
 import mongoose from 'mongoose'
 
+const DB_URI = process.env.DB_URI ?? 'mongodb://localhost:27017/db-infinity-records' 
 // Define una función asincrona para definir la configuración del ODM Mongoose par usar MongoDB
-async function dbConnect () {
+const dbConnect = async () => {
 
     try {
-        await mongoose.connect ( 'mongodb+srv://estebanosuna:1oXnQXvioUMwXflh@cluster0.6djkdvl.mongodb.net/db-infinity-records' )
+        await mongoose.connect ( DB_URI, {} )
 
         console.log ( 'Base de datos conectada exitosamente' )
     }

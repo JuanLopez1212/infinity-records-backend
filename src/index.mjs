@@ -14,6 +14,7 @@ import reproduction from './routes/reproduction.route.mjs' // Importando las rut
 import dbConnect from './config/mongo.config.mjs' // Importando la configuración de la base de datos
 
 const app = express()
+const PORT = process.env.PORT ?? 3000
 
 dbConnect()
 
@@ -30,8 +31,8 @@ app.use ( user );
 app.use(auth); //vincula las rutas para la identidad auth
 
 
-app.listen ( 3000, () => {
-    console.log ( 'Servidor corriendo en http//localhost:3000' )
+app.listen ( PORT, () => {
+    console.log ( `Servidor corriendo en http//localhost:${ PORT } ${ process.env.DB_URI}` )
 
 })
 
