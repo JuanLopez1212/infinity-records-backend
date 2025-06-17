@@ -11,21 +11,16 @@ const songsSchema = new mongoose.Schema({
         required: [ true, 'El titulo de la canción es obligatorio' ]
     }, 
     // username, puede ser: un correo, # identificacion, alias */
-    cover_url: {
+    coverUrl: {
         type: String,
         required: [ true, 'la portada de la canción es obligatoria' ]
     },
-    file_url: {
+    fileUrl: {
         type: String,
         required: [ true, 'El archivo es obligatorio' ]
     },
-    // genre: {
-    //     type: String,
-    //     required:[true, 'El genero es obligatorio'],
-    //     trim:true
-    // },
-    release_date: {
-        type: String,
+    releaseDate: {
+        type: Date,
         trim: true,
         required:[true, "La fecha de lanzamiento es obligatoria"],  
     },
