@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 
 
 const generateToken = (payload) => {
-    
+    console.log("JWT",process.env.JWT_SECRET);
     const token = jwt.sign(
         payload,
         process.env.JWT_SECRET,

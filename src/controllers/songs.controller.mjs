@@ -5,6 +5,8 @@ const createSongs = async (req, res) => {
     // CONTROLA LAS EXCEPCIONES DE LA CONSULTA A LA BASE DE DATOS
 
     try{
+        const nameArtist = req.authUser
+        inputData.nameArtist = nameArtist.name
     const registeredSongs = await songsModel.create( inputData); 
 
     console.log(registeredSongs);  //imprime en la consola

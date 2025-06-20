@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 const reproductionSchema = new mongoose.Schema({
 
     // Definir propiedades, atributos o campos (Documento)
-    cancionId: {
+    songsId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'song',
         unique: true,
@@ -19,10 +19,6 @@ const reproductionSchema = new mongoose.Schema({
         required: false,
         trim: true  // Puede ser anónimo
     },
-    fecha: {
-        type: Date,
-        default: Date.now
-    },
     dispositivo: {
         type: String,
         enum: ['web', 'mobile', 'otro'],
@@ -32,12 +28,11 @@ const reproductionSchema = new mongoose.Schema({
 
     cantidadReproduccion:{
         type: Number, 
-        default: 1,
+        default: 0,
         required:true,
         min:0,
-
     }
-    
+
 
 }, {
     timestamps: true, // Agrega las propiedades createdAt , updatedAt
