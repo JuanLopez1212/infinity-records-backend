@@ -19,7 +19,7 @@ const PORT = process.env.PORT ?? 3000
 
 dbConnect()
 
-
+app.use ( cors() )
 // Endpoint: http//localhost:3000/
 app.use(cors ());
 app.use(express.json());

@@ -6,6 +6,7 @@ const createArtist = async ( req, res ) => {
     
     // Try: Controla las excepciones de la consulta a la base de datos 
     try {
+        console.log("holaaa", inputData);
         const registeredArtists = await artistsModel.create ( inputData )
 
         console.log ( registeredArtists )  // Imprime en la consola

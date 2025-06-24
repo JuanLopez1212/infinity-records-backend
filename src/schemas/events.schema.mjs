@@ -1,31 +1,40 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const eventsSchema = new mongoose.Schema ({
-
+const eventsSchema = new mongoose.Schema(
+  {
     title: {
-        type: String,
-        required:[true,"El titulo del evento es obligatorio"],
-        trim: true
+      type: String,
+      required: [true, "El titulo del evento es obligatorio"],
+      trim: true,
     },
     description: {
-        type: String,
-        trim:true
+      type: String,
+      trim: true,
     },
-    Date: {
-        type: Date,
-        required:[true,"La fecha del evento es obligatorio"],
-        trim:true,
-        default:Date.now
+    date: {
+      type: Date, //ia pregunntar fecha y hora
+      required: [true, "La fecha del evento es obligatorio"],
+      trim: true,
+      default: Date.now,
     },
-}, {
-    timestamps: true,
-    versionKey: false
-} );
 
-const eventsModel = mongoose.model(
-    "events",
-    eventsSchema
+    address: {
+      type: String,
+      required: false,
+    },
+
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+    versionKey: false,
+  }
 );
 
+const eventsModel = mongoose.model("events", eventsSchema);
 
 export default eventsModel;

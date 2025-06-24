@@ -16,11 +16,12 @@ const albumSchema = new mongoose.Schema( {
         required: true,
         default: Date.now
     },
-    userId: {
+    artistId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
+        ref: 'artist',
         required: true
-    }
+    },
+
 
 }, {} )
 
