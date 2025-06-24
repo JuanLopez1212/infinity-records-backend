@@ -1,6 +1,6 @@
 // const express = require ( 'express' )
 import express from 'express'
-
+import cors from 'cors' 
 
 import events from "./routes/events.route.mjs"
 import user from './routes/user.route.mjs' // Importando las rutas de la entidad
@@ -18,7 +18,7 @@ const PORT = process.env.PORT ?? 3000
 
 dbConnect()
 
-
+app.use ( cors() )
 // Endpoint: http//localhost:3000/
 
 app.use(express.json());
