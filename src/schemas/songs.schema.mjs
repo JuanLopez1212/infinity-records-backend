@@ -11,34 +11,55 @@ const songsSchema = new mongoose.Schema({
         required: [ true, 'El titulo de la canción es obligatorio' ]
     }, 
     // username, puede ser: un correo, # identificacion, alias */
-    cover_url: {
+    coverUrl: {
         type: String,
         required: [ true, 'la portada de la canción es obligatoria' ]
     },
-    file_url: {
+    fileUrl: {
         type: String,
         required: [ true, 'El archivo es obligatorio' ]
     },
-    // genre: {
-    //     type: String,
-    //     required:[true, 'El genero es obligatorio'],
-    //     trim:true
-    // },
-    release_date: {
-        type: String,
+    releaseDate: {
+        type: Date,
         trim: true,
         required:[true, "La fecha de lanzamiento es obligatoria"],  
     },
-    userId:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
+
+    duration: { 
+        type: Number
+    },
+
+    genre:{
+        type:[String]
+    },
+    
+    authors: {
+        type: [String],
         required: true
     },
+
+    productors: {
+        type: [String],
+        required: true
+    },
+
     albumId:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'albums',
         required: false
     },
+
+    artistId:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'artist',
+        required: false
+    },
+
+    nameArtist:{
+        type: String
+    },
+    
+    uploadDate: {type: Date, default: Date.now }
 
 }, {
     timestamps: true, // Agrega las propiedades createdAt , updatedAt

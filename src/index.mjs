@@ -1,6 +1,6 @@
 // const express = require ( 'express' )
 import express from 'express'
-import cors from 'cors' 
+import cors from 'cors'
 
 import events from "./routes/events.route.mjs"
 import user from './routes/user.route.mjs' // Importando las rutas de la entidad
@@ -13,6 +13,7 @@ import reproduction from './routes/reproduction.route.mjs' // Importando las rut
 
 import dbConnect from './config/mongo.config.mjs' // Importando la configuración de la base de datos
 
+
 const app = express()
 const PORT = process.env.PORT ?? 3000
 
@@ -20,7 +21,7 @@ dbConnect()
 
 app.use ( cors() )
 // Endpoint: http//localhost:3000/
-
+app.use(cors ());
 app.use(express.json());
 app.use ( songs );
 app.use ( reproduction );
