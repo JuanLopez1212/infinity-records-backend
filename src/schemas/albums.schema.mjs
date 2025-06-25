@@ -21,6 +21,9 @@ const albumSchema = new mongoose.Schema( {
         ref: 'artist',
         required: true
     },
+    nameArtist: {
+        type: String 
+    }
 
 
 }, {} )
