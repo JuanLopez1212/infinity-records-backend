@@ -1,5 +1,5 @@
 import express from 'express' 
-import { createAlbum, getAlbumById, getAllAlbums, removeAlbumsById, updateAlbumById } from '../controllers/albums.controller.mjs'
+import { createAlbum, getAlbumByArtistId, getAlbumById, getAllAlbums, removeAlbumsById, updateAlbumById } from '../controllers/albums.controller.mjs'
 import { authUser } from '../middlewares/auth-user.middleware.mjs'
 
 const router = express.Router ()
@@ -10,6 +10,7 @@ router.get ( '/api/albums', getAllAlbums)
 router.get ( '/api/albums/:id', getAlbumById )
 router.delete ( '/api/albums/:id', authUser, removeAlbumsById )
 router.patch ( '/api/albums/:id', authUser, updateAlbumById )
+router.get ( '/api/albums/artist/:id', getAlbumByArtistId )
 
 
 

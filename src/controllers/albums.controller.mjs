@@ -20,7 +20,7 @@ const createAlbum = async ( req, res ) => {
 const getAllAlbums = async ( req, res ) => {
     
     try {
-        const data = await albumsModel.find ( {} ).populate(['userId']);
+        const data = await albumsModel.find ( {} ).populate(['artistId']);
         res.json ( data )     
     } 
     catch (error) {
@@ -35,7 +35,26 @@ const getAlbumById = async ( req, res ) => {
     const albumsId = req.params.id    // El nombre final dependerá del nombre del parámetro en la ruta 
     
     try {
-        const data = await albumsModel.findById ( albumsId ).populate(['userId']);
+        const data = await albumsModel.findById ( albumsId ).populate(['artistId']);
+
+        // Verifica si el artista no existe y lanza el respectivo mensaje al cliente
+        if ( ! data ) {
+            return res.json ( { msg: 'El álbum no se encuentra registrado' } )
+        }
+        
+        res.json ( data )
+    } 
+    catch (error) {
+        console.error ( error )
+        res.json ( { msg: 'Error: No se pudo encontrar el álbum' } )
+    }
+}
+
+const getAlbumByArtistId = async ( req, res ) => {
+    const artistId = req.params.id    // El nombre final dependerá del nombre del parámetro en la ruta 
+    
+    try {
+        const data = await albumsModel.find ({ artistId });
 
         // Verifica si el artista no existe y lanza el respectivo mensaje al cliente
         if ( ! data ) {
@@ -90,5 +109,6 @@ export {
     getAllAlbums,
     getAlbumById,
     removeAlbumsById,
-    updateAlbumById
+    updateAlbumById,
+    getAlbumByArtistId
 }

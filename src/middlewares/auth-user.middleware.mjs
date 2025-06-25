@@ -1,4 +1,4 @@
-  
+
 import { verifyToken } from '../helpers/jwt.helper.mjs';
 
 const authUser = ( req, res, next ) => {

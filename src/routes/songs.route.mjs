@@ -1,6 +1,6 @@
 // File Routes: Sirve para definir los Endpoints de una entidad
 import express from 'express'   
-import { createSongs,getAllSongs,getSongsById,removeSongsById,updateSongsById } from '../controllers/songs.controller.mjs';
+import { createSongs,getAllSongs,getSongsByArtistId,getSongsById,removeSongsById,updateSongsById } from '../controllers/songs.controller.mjs';
 import { authUser } from '../middlewares/auth-user.middleware.mjs';
 // Importamos Router de express
 const router = express.Router ();       // Invocando Router (preparándolo para definir rutas)
@@ -12,7 +12,8 @@ router.post('/api/songs', authUser, createSongs);
 router.get('/api/songs', getAllSongs);
 router.get('/api/songs/:id', getSongsById);  //:id = Parametrizar la ruta: Creamos una especie de variable
 router.delete('/api/songs/:id', authUser, removeSongsById);
-router.patch('/api/songs/:id', authUser, updateSongsById) //Actulizacion parcial 
+router.patch('/api/songs/:id', authUser, updateSongsById);
+router.get('/api/songs/artist/:id', getSongsByArtistId); //Actulizacion parcial 
 
 
 

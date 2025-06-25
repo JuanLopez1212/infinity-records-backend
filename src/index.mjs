@@ -10,7 +10,6 @@ import auth from'./routes/auth.route.mjs';
 import songs from './routes/songs.route.mjs' // Importando las rutas de la entidad
 import reproduction from './routes/reproduction.route.mjs' // Importando las rutas de la entidad
 
-
 import dbConnect from './config/mongo.config.mjs' // Importando la configuración de la base de datos
 
 

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const DB_URI = process.env.DB_URI ?? 'mongodb://localhost:27017/db-infinity-records' 
+const DB_URI = process.env.DB_URI || 'mongodb://localhost:27017/db-infinity-records' 
 // Define una función asincrona para definir la configuración del ODM Mongoose par usar MongoDB
 const dbConnect = async () => {
 
