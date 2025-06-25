@@ -5,6 +5,7 @@ const createAlbum = async ( req, res ) => {
     
     // Try: Controla las excepciones de la consulta a la base de datos 
     try {
+        console.log(req.authuser)
         const registeredAlbums = await albumsModel.create ( inputData )
 
         console.log ( registeredAlbums )  // Imprime en la consola
