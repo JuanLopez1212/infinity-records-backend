@@ -4,6 +4,10 @@ const createSongs = async (req, res) => {
     const inputData = req.body;
     // CONTROLA LAS EXCEPCIONES DE LA CONSULTA A LA BASE DE DATOS
 
+    if (req.user.role !== 'artists' ) {
+        return res.status(403).json({ msg: 'No tienes permiso para subir canciones' } ) 
+    } 
+    
     try{
         const nameArtist = req.authUser
         inputData.nameArtist = nameArtist.name
@@ -59,6 +63,26 @@ const getSongsById = async (req, res) => {
     }
 }
 
+
+const getSongsByArtistId = async ( req, res ) => {
+    const artistId = req.params.id    // El nombre final dependerá del nombre del parámetro en la ruta 
+    
+    try {
+        const data = await songsModel.find ({ artistId });
+
+        // Verifica si el artista no existe y lanza el respectivo mensaje al cliente
+        if ( ! data ) {
+            return res.json ( { msg: 'la cancion de este artista no se encuentra registrado' } )
+        }
+        
+        res.json ( data )
+    } 
+    catch (error) {
+        console.error ( error )
+        res.json ( { msg: 'Error: No se pudo encontrar el álbum' } )
+    }
+}
+
 const removeSongsById = async (req, res) => {
 
     const songsId = req.params.id;
@@ -105,6 +129,7 @@ export {
     getAllSongs,
     getSongsById, 
     removeSongsById, 
-    updateSongsById
+    updateSongsById,
+    getSongsByArtistId
 }
 

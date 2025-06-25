@@ -46,12 +46,12 @@ const songsSchema = new mongoose.Schema({
     albumId:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'albums',
-        required: false
+        
     },
 
     artistId:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'artist',
+        ref: 'artists',
         required: false
     },
 
