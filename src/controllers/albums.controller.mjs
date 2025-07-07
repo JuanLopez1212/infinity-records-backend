@@ -2,9 +2,17 @@ import albumsModel from "../schemas/albums.schema.mjs"
 
 const createAlbum = async ( req, res ) => {
     const inputData = req.body        // Extraigo el objeto enviado 
-    
+    const { role, _id } = req.authUser;
+
     // Try: Controla las excepciones de la consulta a la base de datos 
     try {
+
+        if( role !== 'artists' ) {
+            res.json({ error: 'No puedes registrar album' });
+        }
+
+        inputData.userId = _id;
+
         console.log(req.authuser)
         const nameArtist = req.authUser
         inputData.name = nameArtist.name 
@@ -23,7 +31,7 @@ const createAlbum = async ( req, res ) => {
 const getAllAlbums = async ( req, res ) => {
     
     try {
-        const data = await albumsModel.find ( {} ).populate(['artistId']);
+        const data = await albumsModel.find ( {} ).populate(['userId']);
         res.json ( data )     
     } 
     catch (error) {
@@ -38,7 +46,7 @@ const getAlbumById = async ( req, res ) => {
     const albumsId = req.params.id    // El nombre final dependerá del nombre del parámetro en la ruta 
     
     try {
-        const data = await albumsModel.findById ( albumsId ).populate(['artistId']);
+        const data = await albumsModel.findById ( albumsId ).populate(['userId']);
 
         // Verifica si el artista no existe y lanza el respectivo mensaje al cliente
         if ( ! data ) {
