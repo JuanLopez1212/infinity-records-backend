@@ -2,6 +2,7 @@ import songsModel from "../schemas/songs.schema.mjs";
 
 const createSongs = async (req, res) => {
     const inputData = req.body;
+    // inputData.artistId = "6854a1a85013a70fee1d14a5";   /// Quitar solo para probar
     // CONTROLA LAS EXCEPCIONES DE LA CONSULTA A LA BASE DE DATOS
 
     if (req.user.role !== 'artists' ) {
@@ -11,10 +12,10 @@ const createSongs = async (req, res) => {
     try{
         const nameArtist = req.authUser
         inputData.nameArtist = nameArtist.name
-    const registeredSongs = await songsModel.create( inputData); 
+        const registeredSongs = await songsModel.create( inputData); 
 
-    console.log(registeredSongs);  //imprime en la consola
-    res.status(201).json(registeredSongs); //Enviando la respuesta al cliente(
+        console.log(registeredSongs);  //imprime en la consola
+        res.status(201).json(registeredSongs); //Enviando la respuesta al cliente(
 
     }
 
