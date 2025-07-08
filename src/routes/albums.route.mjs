@@ -10,7 +10,7 @@ router.get ( '/api/albums', getAllAlbums)
 router.get ( '/api/albums/:id', getAlbumById )
 router.delete ( '/api/albums/:id', authUser, removeAlbumsById )
 router.patch ( '/api/albums/:id', authUser, updateAlbumById )
-router.get ( '/api/albums/artist/:id', getAlbumByArtistId )
+router.get ( '/api/albums/users/:id', getAlbumByArtistId )
 
 
 

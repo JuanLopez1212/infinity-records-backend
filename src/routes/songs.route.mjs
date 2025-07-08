@@ -13,7 +13,7 @@ router.get('/api/songs', getAllSongs);
 router.get('/api/songs/:id', getSongsById);  //:id = Parametrizar la ruta: Creamos una especie de variable
 router.delete('/api/songs/:id', authUser, removeSongsById);
 router.patch('/api/songs/:id', authUser, updateSongsById);
-router.get('/api/songs/artist/:id', getSongsByArtistId); //Actulizacion parcial 
+router.get('/api/songs/users/:id', getSongsByArtistId); //Actulizacion parcial 
 
 
 
