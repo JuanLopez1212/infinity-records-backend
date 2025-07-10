@@ -2,14 +2,19 @@ import songsModel from "../schemas/songs.schema.mjs";
 
 const createSongs = async (req, res) => {
     const inputData = req.body;
+    const { role, _id } = req.authUser;
     // inputData.artistId = "6854a1a85013a70fee1d14a5";   /// Quitar solo para probar
     // CONTROLA LAS EXCEPCIONES DE LA CONSULTA A LA BASE DE DATOS
 
-    if (req.authUser.role !== 'artists' ) {
-        return res.status(403).json({ msg: 'No tienes permiso para subir canciones' } ) 
-    } 
-    
     try{
+
+        if (role !== 'artists' ) {
+            return res.status(403).json({ msg: 'No tienes permiso para subir canciones' } ) 
+        } 
+
+        inputData.userId = _id;
+
+        console.log(req.authuser)
         const nameArtist = req.authUser
         inputData.nameArtist = nameArtist.name
         const registeredSongs = await songsModel.create( inputData); 
@@ -44,7 +49,7 @@ const getSongsById = async (req, res) => {
 
     try{
     
-        const data = await songsModel.findById(songsId).populate(['userId']);
+        const data = await songsModel.findById(songsId).populate(['userId','albumId']);
         //  const data = await SongsModel.findOne({_id:SongsId
         //  });
         
@@ -52,9 +57,7 @@ const getSongsById = async (req, res) => {
 
             return res.json({msg: 'Error: La canción no se encuentra registrada'});
         }
-
         res.json(data); 
-
     }
 
 
@@ -66,10 +69,10 @@ const getSongsById = async (req, res) => {
 
 
 const getSongsByArtistId = async ( req, res ) => {
-    const artistId = req.params.id    // El nombre final dependerá del nombre del parámetro en la ruta 
+    const userId = req.params.id    // El nombre final dependerá del nombre del parámetro en la ruta 
     
     try {
-        const data = await songsModel.find ({ artistId });
+        const data = await songsModel.find ({ userId });
 
         // Verifica si el artista no existe y lanza el respectivo mensaje al cliente
         if ( ! data ) {
@@ -85,7 +88,6 @@ const getSongsByArtistId = async ( req, res ) => {
 }
 
 const removeSongsById = async (req, res) => {
-
     const songsId = req.params.id;
 
     try{ 
