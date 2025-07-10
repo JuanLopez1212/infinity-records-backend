@@ -28,7 +28,7 @@ const albumSchema = new mongoose.Schema( {
 }, {} )
 
 const albumsModel = mongoose.model (
-    'Albums',
+    'albums',
     albumSchema
 )
 

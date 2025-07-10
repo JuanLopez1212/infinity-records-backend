@@ -5,7 +5,7 @@ const createSongs = async (req, res) => {
     // inputData.artistId = "6854a1a85013a70fee1d14a5";   /// Quitar solo para probar
     // CONTROLA LAS EXCEPCIONES DE LA CONSULTA A LA BASE DE DATOS
 
-    if (req.user.role !== 'artists' ) {
+    if (req.authUser.role !== 'artists' ) {
         return res.status(403).json({ msg: 'No tienes permiso para subir canciones' } ) 
     } 
     
@@ -29,7 +29,7 @@ const createSongs = async (req, res) => {
 const getAllSongs = async (req, res) => {
     
     try{
-    const data = await songsModel.find({}).populate(['userId']);
+    const data = await songsModel.find({}).populate(['userId','albumId'])
     res.json( data );
     }
 
