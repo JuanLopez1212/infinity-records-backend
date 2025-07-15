@@ -53,7 +53,10 @@ const reNewToken = (req, res) => {
 
     const token = generateToken(payload);
 
-    res.json({token});
+    res.json({
+        token,
+        user: payload
+    });
 }
 
 export {

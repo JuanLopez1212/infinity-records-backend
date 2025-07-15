@@ -85,7 +85,7 @@ const removeAlbumsById = async ( req, res ) => {
     const albumsId = req.params.id
     
     try {
-        const data = await artistsModel.findByIdAndDelete ( albumsId )
+        const data = await albumsModel.findByIdAndDelete ( albumsId )
         
         if ( ! data ) {
         return res.json ( { msg: 'El álbum ya ha sido eliminado' } )
