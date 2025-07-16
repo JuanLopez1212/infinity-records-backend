@@ -41,6 +41,22 @@ const createUser = async ( req, res ) => {
     }
 
 }
+
+const getArtists = async ( req, res ) => {
+    try {
+        const artists = await userModel.find({ role: "artists" }).select("username")
+
+        res.status(200).json({
+            ok: true,
+            artists
+        })
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ msg: "Error: No se pudo obtener la lista de artistas"})
+    }
+}
+
+
 const getAllUser = async (req, res) => {
     
     try {
@@ -120,5 +136,6 @@ export {
     getAllUser,
     getUserById,
     removeUserById,
-    updateUserById
+    updateUserById,
+    getArtists
 }
