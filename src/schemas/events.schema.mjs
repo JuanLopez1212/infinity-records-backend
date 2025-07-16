@@ -28,6 +28,10 @@ const eventsSchema = new mongoose.Schema(
       ref: "users",
       required: true,
     },
+    image:{
+      type: String,
+      required: false
+    }
   },
   {
     timestamps: true,
