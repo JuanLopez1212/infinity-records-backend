@@ -54,6 +54,47 @@ const getArtists = async ( req, res ) => {
         console.error(error)
         res.status(500).json({ msg: "Error: No se pudo obtener la lista de artistas"})
     }
+
+}
+
+const createNewUser = async ( req, res ) => {
+    const inputData = req.body;
+    const { name, username, password, role, email } = inputData;
+
+    let artistId;
+    let newUser = {};
+
+    if( inputData.role == "artists" ) {
+        console.log( "artista" );
+
+        const data = await artistsModel.create( inputData.artists );
+        if( data ) {
+            artistId = data._id;
+        }
+    }
+
+    if( artistId )
+        newUser = { name, username, password, role, email, artistId };
+    else 
+        newUser = { name, username, password, role, email };
+
+    //paso 2 encriptar la contrasena
+
+    const salt = bcrypt.genSaltSync();
+    console.log('salt', salt);           //genero una cadena aleatoria
+
+    //mezclar y generar el hash
+    const hashPassword = bcrypt.hashSync(
+        newUser.password,
+        salt
+    );
+    console.log('hashPassword',hashPassword);
+    newUser.password = hashPassword;
+
+    const data = await userModel.create( newUser );
+    console.log( "users ", data );
+
+    res.json( data )
 }
 
 
@@ -137,5 +178,6 @@ export {
     getUserById,
     removeUserById,
     updateUserById,
-    getArtists
+    getArtists,
+    createNewUser
 }
