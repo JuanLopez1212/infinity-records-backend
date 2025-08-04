@@ -2,6 +2,7 @@
 import express from 'express'
 import cors from 'cors'
 
+import test from "./routes/test.route.mjs"
 import events from "./routes/events.route.mjs"
 import user from './routes/user.route.mjs' // Importando las rutas de la entidad
 import artists from './routes/artists.route.mjs'
@@ -28,6 +29,7 @@ app.use(events);
 app.use(artists) // Implementando las rutas de artistas
 app.use(albums)
 app.use ( user );
+app.use (test)
 app.use(auth); //vincula las rutas para la identidad auth
 
 
