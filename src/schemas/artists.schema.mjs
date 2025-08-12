@@ -5,24 +5,28 @@ const artistsSchema = new mongoose.Schema(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "users",
       required: true,
     },
     
     stageName:{ 
         type: String,
+        required: [true, "El nombre artistico es obligatorio"]
     },
 
     bio:{
        type: String,
+       maxlength: 500
     },
 
     genres:{
-        type: [String]
+        type: [String],
+        default: [] 
     },
 
     profileImage: {
         type: String,
+        match: [/^https?:\/\//, "Debe ser una URL válida"] 
     },
 
 

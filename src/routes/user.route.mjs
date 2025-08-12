@@ -1,16 +1,16 @@
 import express from "express";   //importo dependencia
-import { createNewUser, createUser, getAllUser, getArtists, getUserById, removeUserById, updateUserById } from "../controllers/user.controller.mjs";
+import { createNewUser, getAllUser, getArtists, getUserById, removeUserById, updateUserById } from "../controllers/user.controller.mjs";
 
 const router = express.Router(); //invocando el router de express
 
 //Definir las rutas para la entidad Product.
-router.post( "/api/users" , createUser );
+router.post( "/api/users" , createNewUser );
 router.get ("/api/users", getAllUser);
 router.get("/api/users/:id", getUserById);
 router.delete("/api/users/:id",removeUserById);             // id (parametrizar la ruta): creamos una especie de variable 
 router.patch("/api/users/:id", updateUserById);
 router.get( "/api/users/role/artist", getArtists )
-router.post('/api/users/new', createNewUser);
+// router.post('/api/users/new', createNewUser);
 
 //exponer el router de este archivo para ser usado por otros en la aplicacion
 export default router;

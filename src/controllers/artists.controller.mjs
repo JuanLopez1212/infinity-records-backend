@@ -36,7 +36,7 @@ const getArtistById = async ( req, res ) => {
     const artistId = req.params.id    // El nombre final dependerá del nombre del parámetro en la ruta 
     
     try {
-        const data = await artistsModel.findById ( artistId )
+        const data = await artistsModel.findById ( artistId ).populate(['userId'])
 
         // Verifica si el artista no existe y lanza el respectivo mensaje al cliente
         if ( ! data ) {

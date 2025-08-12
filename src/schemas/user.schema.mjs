@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: [ "admin", "users", "artists"],
+        enum: [ "admin", "users", "artists", "company"],
         default: 'users'
     },
     email: {
@@ -32,6 +32,9 @@ const userSchema = new mongoose.Schema({
         match:[/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/, 'Por favor, introduce un correo electrónico válido.'],
         unique:[true,"Este email ya esta registrado, por favor introduce un email validos"]
     },
+
+    artistId: { type: mongoose.Schema.Types.ObjectId, ref: "artists" }
+
 
 }, {
     timestamps: true, // Agrega las propiedades createdAt , updatedAt

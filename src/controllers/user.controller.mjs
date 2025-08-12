@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 
 import userModel from "../schemas/user.schema.mjs";
+import artistsModel from '../schemas/artists.schema.mjs';
 
 const createUser = async ( req, res ) => {
     const inputData = req.body;
@@ -57,46 +58,52 @@ const getArtists = async ( req, res ) => {
 
 }
 
-const createNewUser = async ( req, res ) => {
-    const inputData = req.body;
-    const { name, username, password, role, email } = inputData;
+const createNewUser = async (req, res) => {
+    const { name, username, password, role, email, artists } = req.body;
 
-    let artistId;
-    let newUser = {};
-
-    if( inputData.role == "artists" ) {
-        console.log( "artista" );
-
-        const data = await artistsModel.create( inputData.artists );
-        if( data ) {
-            artistId = data._id;
+    try {
+        // 1️⃣ Verificar si ya existe usuario con mismo username o email
+        const userFound = await userModel.findOne({
+            $or: [{ username }, { email }]
+        });
+        if (userFound) {
+            return res.status(400).json({ msg: 'El usuario ya existe.' });
         }
+
+        // 2️⃣ Encriptar contraseña
+        const salt = bcrypt.genSaltSync();
+        const hashPassword = bcrypt.hashSync(password, salt);
+
+        // 3️⃣ Crear usuario primero
+        const newUser = await userModel.create({
+            name,
+            username,
+            password: hashPassword,
+            role,
+            email
+        });
+
+        // 4️⃣ Si es artista, crear el perfil de artista con referencia a userId
+        if (role === "artists" && artists) {
+            const newArtist = await artistsModel.create({
+                userId: newUser._id, // vínculo con el usuario
+                stageName: artists.name,
+                bio: artists.bio,
+                genres: artists.genres,
+                profileImage: artists.profileImage
+            });
+
+            // (Opcional) Si quieres guardar la referencia en el usuario
+            await userModel.findByIdAndUpdate(newUser._id, { artistId: newArtist._id });
+        }
+
+        res.status(201).json({ msg: "Usuario creado correctamente", user: newUser });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: 'Error: No se pudo crear el usuario' });
     }
-
-    if( artistId )
-        newUser = { name, username, password, role, email, artistId };
-    else 
-        newUser = { name, username, password, role, email };
-
-    //paso 2 encriptar la contrasena
-
-    const salt = bcrypt.genSaltSync();
-    console.log('salt', salt);           //genero una cadena aleatoria
-
-    //mezclar y generar el hash
-    const hashPassword = bcrypt.hashSync(
-        newUser.password,
-        salt
-    );
-    console.log('hashPassword',hashPassword);
-    newUser.password = hashPassword;
-
-    const data = await userModel.create( newUser );
-    console.log( "users ", data );
-
-    res.json( data )
-}
-
+};
 
 const getAllUser = async (req, res) => {
     
