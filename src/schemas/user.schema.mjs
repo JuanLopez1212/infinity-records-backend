@@ -18,16 +18,19 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
+        trim:true,
         required: [ true, 'La contraseña es obligatoria' ]
     },
     role: {
         type: String,
+        required:[ 'El rol del usuario es obligatorio'],
         enum: [ "admin", "users", "artists", "company"],
         default: 'users'
     },
     email: {
         type: String,
         trim: true,
+        lowercase:true,
         required:[true, "El correo del usuario es obligatorio"],
         match:[/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/, 'Por favor, introduce un correo electrónico válido.'],
         unique:[true,"Este email ya esta registrado, por favor introduce un email validos"]
