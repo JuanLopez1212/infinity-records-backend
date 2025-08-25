@@ -35,17 +35,14 @@ const artistsSchema = new mongoose.Schema(
     socials: {
       instagram: {
         type: String,
-        match: [/^https?:\/\/(www\.)?instagram\.com\/[a-zA-Z0-9._-]+$/, "Debe ser un perfil válido de Instagram"],
         default: null
       },
       youtube: {
         type: String,
-        match: [/^https?:\/\/(www\.)?youtube\.com\/(channel|c|user)\/[a-zA-Z0-9._-]+$/, "Debe ser un canal válido de YouTube"],
         default: null
       },
       facebook: {
         type: String,
-        match: [/^https?:\/\/(www\.)?facebook\.com\/[a-zA-Z0-9._-]+$/, "Debe ser un perfil válido de Facebook"],
         default: null
       }
     }

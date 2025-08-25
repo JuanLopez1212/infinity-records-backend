@@ -6,17 +6,10 @@
   "type": "module",
   "scripts": {
     "dev": "node --env-file .env --watch ./src/index.mjs",
-<<<<<<< HEAD
     "test":"cross-env NODE_OPTIONS=--experimental-vm-modules jest",
     "test:bash": "NODE_OPTIONS=--experimental-vm-modules jest",
     "test:cmd": "set NODE_OPTIONS=--experimental-vm-modules && jest",
     "test:powershell": "$env;NODE_OPTIONS=--experimental-vm-modules; jest"
-=======
-    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
-    "test:bash": "NODE_OPTIONS=--experimental-vm-modules  jest",
-    "test:cdm": " set NODE_OPTIONS=--experimental-vm-modules && jest",
-    "test:powershell ": "$env:NODE_OPTIONS=--experimental-vm-modules; jest"
->>>>>>> 1b725335658e37b1ecd94d031ef8938f62dbf41f
   },
   "author": "Juan Diego López <juandiegolopezortiz4@gmail.com>",
   "license": "ISC",
