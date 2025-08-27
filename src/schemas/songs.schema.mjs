@@ -45,7 +45,8 @@ const songsSchema = new mongoose.Schema({
 
     albumId:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'albums'
+        ref: 'albums',
+        required: false 
     },
 
     userId:{

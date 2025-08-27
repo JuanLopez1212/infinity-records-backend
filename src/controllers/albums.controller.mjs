@@ -81,6 +81,26 @@ const getAlbumByArtistId = async ( req, res ) => {
     }
 }
 
+const getPublicAlbumByArtistId = async ( req, res ) => {
+    const userId = req.params.id    // El nombre final dependerá del nombre del parámetro en la ruta 
+    
+    try {
+        const data = await albumsModel.find ({ userId});
+        console.log(data);
+
+        // Verifica si el artista no existe y lanza el respectivo mensaje al cliente
+        if ( ! data ) {
+            return res.json ( { msg: 'El álbum no se encuentra registrado' } )
+        }
+        
+        res.json ( data )
+    } 
+    catch (error) {
+        console.error ( error )
+        res.json ( { msg: 'Error: No se pudo encontrar el álbum' } )
+    }
+}
+
 const removeAlbumsById = async ( req, res ) => {
     const albumsId = req.params.id
     
@@ -122,5 +142,6 @@ export {
     getAlbumById,
     removeAlbumsById,
     updateAlbumById,
-    getAlbumByArtistId
+    getAlbumByArtistId,
+    getPublicAlbumByArtistId
 }

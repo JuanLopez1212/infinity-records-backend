@@ -35,15 +35,15 @@ const artistsSchema = new mongoose.Schema(
     socials: {
       instagram: {
         type: String,
-        default: null
+        
       },
       youtube: {
         type: String,
-        default: null
+        
       },
       facebook: {
         type: String,
-        default: null
+        
       }
     }
 

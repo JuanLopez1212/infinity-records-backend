@@ -11,6 +11,10 @@ const albumSchema = new mongoose.Schema( {
         type: String,
         required: true,
     },
+    fileUrl:{
+        type: String,
+        required:true
+    },
     date_release: {
         type: Date,
         required: true,

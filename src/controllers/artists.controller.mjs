@@ -4,6 +4,8 @@ import artistsModel from "../schemas/artists.schema.mjs"
 const createArtist = async ( req, res ) => {
     const inputData = req.body        // Extraigo el objeto enviado 
     
+
+    
     // Try: Controla las excepciones de la consulta a la base de datos 
     try {
         console.log("holaaa", inputData);
@@ -51,6 +53,24 @@ const getArtistById = async ( req, res ) => {
     }
 }
 
+const getArtistByUserId = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const artist = await artistsModel.findOne({ userId });
+
+    if (!artist) {
+      return res.status(404).json({ msg: "El artista no se encuentra registrado" });
+    }
+
+    res.json(artist);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+
+
 const removeArtistById = async ( req, res ) => {
     const artistId = req.params.id
     
@@ -91,6 +111,7 @@ export {
     createArtist,
     getAllArtists,
     getArtistById,
+    getArtistByUserId,
     removeArtistById,
     updateArtistById
 }
