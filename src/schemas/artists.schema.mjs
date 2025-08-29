@@ -9,43 +9,29 @@ const artistsSchema = new mongoose.Schema(
       required: true,
     },
     
-    stageName: { 
-      type: String,
-      required: [true, "El nombre artístico es obligatorio"]
-    },
-
-    bio: {
-      type: String,
-      maxlength: 500,
-      required: [true, "La Descripcion del artist es obligatoria"]
-    },
-
-    genres: {
-      type: [String],
-      default: [],
-      required: [true, "El genero es obligatorio"] 
-    },
-
-    profileImage: {
-      type: String,
-      match: [/^https?:\/\//, "Debe ser una URL válida"] 
-    },
-
-    // Redes sociales del artista
-    socials: {
-      instagram: {
+      stageName: { 
         type: String,
-        
+        required: [true, "El nombre artístico es obligatorio"]
       },
-      youtube: {
+
+      bio: {
         type: String,
-        
+        maxlength: 500,
+        required: [true, "La Descripcion del artist es obligatoria"]
       },
-      facebook: {
+
+      genres: {
+        type: [String],
+        default: [],
+        required: [true, "El genero es obligatorio"] 
+      },
+
+      profileImage: {
         type: String,
-        
-      }
-    }
+        match: [/^https?:\/\//, "Debe ser una URL válida"] 
+      },
+
+    
 
   },
   {
